@@ -1,0 +1,51 @@
+openapi: 3.0.0
+info:
+    title: SMS Verification API
+    version: 1.0.0
+paths:
+    /api/sms/send:
+        post:
+            summary: Send SMS with verification code
+            parameters:
+                - in: query
+                  name: phoneNumber
+                  schema:
+                      type: string
+                  required: true
+                  description: Phone number to send SMS to
+            responses:
+                '200':
+                    description: SMS sent successfully
+                    content:
+                        application/json:
+                            schema:
+                                type: string
+    /api/sms/verify:
+        post:
+            summary: Verify the SMS code
+            parameters:
+                - in: query
+                  name: phoneNumber
+                  schema:
+                      type: string
+                  required: true
+                  description: Phone number to verify
+                - in: query
+                  name: code
+                  schema:
+                      type: string
+                  required: true
+                  description: Verification code
+            responses:
+                '200':
+                    description: Verification successful
+                    content:
+                        application/json:
+                            schema:
+                                type: string
+                '400':
+                    description: Invalid verification code
+                    content:
+                        application/json:
+                            schema:
+                                type: string

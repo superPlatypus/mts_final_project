@@ -1,0 +1,19 @@
+server:
+    port: 8084
+spring:
+    application:
+        name: smsService
+
+twilio:
+    account:
+        sid : ACdae33b9e21aecc08a27bc9cc2fcc66a3
+    auth:
+        token: 20ea4071521fa48970b3a9903b80335c
+    phone:
+        number: +13139080956
+
+eureka:
+    client:
+        service-url:
+            defaultZone: http://localhost:8761/eureka/
+

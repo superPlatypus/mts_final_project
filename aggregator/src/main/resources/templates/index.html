@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+</head>
+<body>
+
+<div th:if="${phoneNumber == null}">
+        <a href="/login">Войти в аккаунт</a>
+</div>
+<div th:if="${phoneNumber != null}">
+    <p th:text="'Ваш номер телефона: ' + ${phoneNumber}"></p>
+    <p th:text="'Номер счёта: ' + ${bankAccount['numBankAccount']}"></p>
+    <p th:text="'Доступно: ' + ${bankAccount['amount']} + 'руб.'"></p>
+</div>
+</body>
+</html>
