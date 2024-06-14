@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Verify</title>
+</head>
+<body>
+<form th:action="@{/login/verify}" method="post">
+    <input type="hidden" id="phoneNumberHidden" name="phoneNumber" th:value="${phoneNumber}" />
+    <label for="code">Код подтверждения:</label>
+    <input type="text" id="code" name="code" required/>
+    <button type="submit">Подтвердить</button>
+    <div th:if="${param.error}">
+        <p>Неверный код подтверждения. Пожалуйста, попробуйте снова.</p>
+    </div>
+</form>
+</body>
+</html>

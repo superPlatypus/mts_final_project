@@ -5,10 +5,13 @@
 </head>
 <body>
 <h1>Вход</h1>
-<form th:action="@{/login}" method="post" th:object="${signin}">
-    <label for="phoneNumber">Номер телефона:</label>
-    <input type="text" id="phoneNumber" th:field="*{phoneNumber}" required/>
-    <button type="submit">Войти</button>
-</form>
+<div id="phoneBlock">
+    <form th:action="@{/login}" method="post" th:object="${signin}">
+        <label for="phoneNumber">Номер телефона:</label>
+        <input type="text" id="phoneNumber" th:field="*{phoneNumber}" required/>
+        <button type="submit"  >Отправить код</button>
+    </form>
+</div>
+
 </body>
 </html>

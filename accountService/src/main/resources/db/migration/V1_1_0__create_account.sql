@@ -8,4 +8,5 @@ create table bank_account
 );
 
 insert into bank_account (num_bank_account, amount)
-values (12345678901234567890, 15000.00);
+values (12345678901234567890, 15000.00),
+       (12345678901234567891, 20000.00)

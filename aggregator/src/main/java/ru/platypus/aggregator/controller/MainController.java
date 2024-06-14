@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import ru.platypus.aggregator.feign.AccountServiceFeignClient;
 import ru.platypus.aggregator.feign.CustomerServiceFeignClient;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 
@@ -40,4 +41,18 @@ public class MainController {
     public Map<String, Object> getCustomerById(@PathVariable int id) {
         return customerServiceFeignClient.getCustomerById(id);
     }
+
+    @GetMapping("/addMoney")
+    public String addMoney(Model model) {
+        return "addMoney";
+    }
+
+    @PostMapping("/addMoney")
+    public String addMoney(@RequestParam("amount") BigDecimal amount, Model model) {
+        int customerId = Integer.parseInt(customerServiceFeignClient.getCurrentCustomer());
+        int bankAccountId = customerServiceFeignClient.getBankAccountByCustomerId(customerId);
+        accountServiceFeignClient.addMoney(bankAccountId, amount);
+        return "redirect:/";
+    }
+
 }
