@@ -19,11 +19,12 @@ public class SmsService {
 
     public void sendSms(String toPhoneNumber) {
         String verificationCode = generateVerificationCode();
-        Message.creator(
-                new PhoneNumber(toPhoneNumber),
-                new PhoneNumber(fromPhoneNumber),
-                "Your verification code is: " + verificationCode
-        ).create();
+        System.out.println(toPhoneNumber + ": " + verificationCode);
+//        Message.creator(
+//                new PhoneNumber(toPhoneNumber),
+//                new PhoneNumber(fromPhoneNumber),
+//                "Your verification code is: " + verificationCode
+//        ).create();
 
         verificationCodes.put(toPhoneNumber, verificationCode);
     }

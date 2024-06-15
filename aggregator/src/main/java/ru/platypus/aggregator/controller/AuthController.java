@@ -16,7 +16,6 @@ import javax.servlet.http.HttpServletResponse;
 
 @Controller
 public class AuthController {
-
     private final CustomerServiceFeignClient customerServiceFeignClient;
     private final SmsServiceFeignClient smsServiceFeignClient;
 

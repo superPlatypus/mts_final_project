@@ -5,8 +5,10 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 
+import javax.annotation.PostConstruct;
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
@@ -14,6 +16,42 @@ import java.util.Date;
 @Entity
 @Table(name = "deposits")
 public class Deposit {
+
+    //проценты
+    public Deposit(int depositAccountId, int depositTypeId, BigDecimal depositAmount, int typePercentPaymentId, int month) {
+        this.depositAccountId = depositAccountId;
+        this.depositTypeId = depositTypeId;
+        this.depositAmount = depositAmount;
+        this.typePercentPaymentId = typePercentPaymentId;
+
+
+        depositRefill = depositTypeId == 1 || depositTypeId == 2;
+        startDate = LocalDate.now();
+        endDate = startDate.plusMonths(month);
+        depositRate = 16.2f;
+        percentPaymentAccountId = depositAccountId;
+        if (typePercentPaymentId == 1){
+            percentPaymentDate = startDate.plusMonths(1);
+        }
+        else {
+            percentPaymentDate = endDate;
+        }
+        depositRefundAccountId = depositAccountId;
+    }
+    //капитализация
+    public Deposit(int depositAccountId, int depositTypeId, BigDecimal depositAmount, int month) {
+        this.depositAccountId = depositAccountId;
+        this.depositTypeId = depositTypeId;
+        this.depositAmount = depositAmount;
+
+        depositRefill = depositTypeId == 1 || depositTypeId == 2;
+        startDate = LocalDate.now();
+        endDate = startDate.plusMonths(month);
+        depositRate = 16.2f;
+        capitalization = true;
+        typePercentPaymentId = 3;
+    }
+
     @Id
     @Column(name = "id_deposit")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,10 +70,10 @@ public class Deposit {
     private BigDecimal depositAmount;
 
     @Column(name = "start_date")
-    private Date startDate;
+    private LocalDate startDate;
 
     @Column(name = "end_date")
-    private Date endDate;
+    private LocalDate endDate;
 
     @Column(name = "deposit_rate")
     private double depositRate;
@@ -47,7 +85,7 @@ public class Deposit {
     private int percentPaymentAccountId;
 
     @Column(name = "percent_payment_date")
-    private Date percentPaymentDate;
+    private LocalDate percentPaymentDate;
 
     @Column(name = "capitalization")
     private boolean capitalization;

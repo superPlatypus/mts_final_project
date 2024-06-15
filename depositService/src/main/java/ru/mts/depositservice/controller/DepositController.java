@@ -1,8 +1,8 @@
 package ru.mts.depositservice.controller;
 
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 import ru.mts.depositservice.entity.Deposit;
 import ru.mts.depositservice.entity.DepositTypes;
 import ru.mts.depositservice.entity.TypesPercentPayment;
@@ -31,27 +31,35 @@ public class DepositController {
         return "Hello from deposit service!!";
     }
 
-    @GetMapping("depositTypes")
-    public List<DepositTypes> getDepositTypes() {
-        return depositTypesRepository.findAll();
+
+
+    @GetMapping("/deposit/{id}")
+    public Deposit getDeposit(@PathVariable int id) {
+        return depositRepository.findById(id).orElseThrow( () -> new RuntimeException("Вклад не существует"));
     }
 
-    @GetMapping("deposit")
-    public List<Deposit> getDeposit() {
-        DepositTypes depositType = depositTypesRepository.findById(1).get();
-        TypesPercentPayment typesPercentPayment = typesPercentPaymentRepository.findById(1).get();
 
-
-
-        Deposit deposit = new Deposit();
-        deposit.setDepositAmount(BigDecimal.valueOf(9500));
-        deposit.setDepositRate(15);
-        deposit.setDepositAccountId(2);
-        deposit.setDepositRefill(true);
-        deposit.setDepositRefundAccountId(2);
-        deposit.setCapitalization(true);
-        deposit.setDepositTypeId(1);
+    @PostMapping("addDepositWithPercents")
+    public ResponseEntity<String> addDepositWithPercents(
+            @RequestParam("depositAccountId") int accountId,
+            @RequestParam("depositTypeId") int depositTypeId,
+            @RequestParam("depositAmount") BigDecimal depositAmount,
+            @RequestParam("typePercentPaymentId") int typePercentPaymentId,
+            @RequestParam("month") int month) {
+        Deposit deposit = new Deposit(accountId, depositTypeId, depositAmount, typePercentPaymentId, month);
         depositRepository.save(deposit);
-        return depositRepository.findAll();
+        return ResponseEntity.ok("Deposit added successfully");
+    }
+
+    @PostMapping("addDepositWithCapitalization")
+    public ResponseEntity<String> addDepositWithCapitalization(
+            @RequestParam("depositAccountId") int accountId,
+            @RequestParam("depositTypeId") int depositTypeId,
+            @RequestParam("depositAmount") BigDecimal depositAmount,
+            @RequestParam("month") int month) {
+        Deposit deposit = new Deposit(accountId, depositTypeId, depositAmount, month);
+        System.out.println(deposit);
+        depositRepository.save(deposit);
+        return ResponseEntity.ok("Deposit added successfully");
     }
 }

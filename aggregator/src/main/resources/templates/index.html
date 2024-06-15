@@ -13,7 +13,9 @@
     <p th:text="'Ваш номер телефона: ' + ${phoneNumber}"></p>
     <p th:text="'Номер счёта: ' + ${bankAccount['numBankAccount']}"></p>
     <p th:text="'Доступно: ' + ${bankAccount['amount']} + 'руб.'"></p>
+    <a href="/addMoney">Пополнить счёт</a>
+    <a href="/deposits">Мои вклады</a>
 </div>
-<a href="/addMoney">Пополнить счёт</a>
+
 </body>
 </html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Вклады</title>
+</head>
+<body>
+<div th:text="'Номер счёта: ' + ${account['numBankAccount']}"></div>
+<div th:text="'Доступно : ' + ${account['amount']} + 'руб.'"></div>
+<div th:if="${not #lists.isEmpty(deposits)}">
+    Мои вклады:
+    <ul>
+        <li th:each="deposit : ${deposits}">
+            <div th:text="'Сумма вклада: ' + ${deposit['depositAmount']}"></div>
+            <div th:text="'Дата открытия: ' + ${deposit['startDate']}"></div>
+            <div th:text="'Дата закрытия: ' + ${deposit['endDate']}"></div>
+            <div th:text="'Процентная ставка: ' + ${deposit['depositRate']} + '%'"></div>
+            <br>
+        </li>
+    </ul>
+</div>
+<a href="/newDeposit"></a>
+
+</body>
+</html>

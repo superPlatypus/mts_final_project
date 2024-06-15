@@ -7,6 +7,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import javax.persistence.*;
 import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 
 @Data
 @Entity
@@ -15,13 +16,16 @@ public class Customer implements UserDetails {
     @Id
     @Column(name = "id_customer")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id_customer;
+    private int idCustomer;
 
     @Column(name = "phone_number")
     private String phoneNumber;
 
     @Column(name = "bank_account_id")
     private int bank_account_id;
+
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<CustomerDeposit> customerDeposits;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Вклады</title>
+</head>
+<body>
+
+<form th:action="@{/deposits}" method="post">
+    <div>
+        <p th:text="'Счет вклада' + ${account}"></p>
+    </div>
+
+    <div>
+        <label for="depositTypes">Тип вклада</label>
+        <select id="depositTypes" name="selectedDepositId">
+            <option th:each="depositType : ${depositTypes}"
+                    th:value="${depositType['id']}"
+                    th:text="${depositType['name']}">Тип</option>
+        </select>
+    </div>
+
+    <div>
+        <label for="amount">Возраст:</label>
+        <input type="number" id="amount" name="amount" placeholder="Введите сумму" />
+    </div>
+
+    <div>
+        <label for="typePercentPayment">Тип вклада</label>
+        <select id="typePercentPayment" name="selectedTypePercentPayment">
+            <option th:each="typePercentPayment : ${typesPercentPayment}"
+                    th:value="${typePercentPayment['id']}"
+                    th:text="${typePercentPayment['period']}">Тип</option>
+        </select>
+    </div>
+
+    <div>
+        <p th:text="'Счет выплат' + ${account}"></p>
+    </div>
+
+
+    <button type="submit">Отправить</button>
+</form>
+
+</body>
+</html>

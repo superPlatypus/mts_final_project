@@ -5,6 +5,7 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/accountService.main.iml" filepath="$PROJECT_DIR$/.idea/modules/accountService.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/aggregator.main.iml" filepath="$PROJECT_DIR$/.idea/modules/aggregator.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/customerService.main.iml" filepath="$PROJECT_DIR$/.idea/modules/customerService.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/depositService.main.iml" filepath="$PROJECT_DIR$/.idea/modules/depositService.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/mts_final_project.iml" filepath="$PROJECT_DIR$/mts_final_project.iml" />
     </modules>
   </component>

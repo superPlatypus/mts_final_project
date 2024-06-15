@@ -2,10 +2,7 @@ package ru.platypus.aggregator.feign;
 
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.*;
 import ru.platypus.aggregator.dto.Signin;
 
 import java.util.List;
@@ -31,5 +28,12 @@ public interface CustomerServiceFeignClient {
     int getBankAccountByCustomerId(@PathVariable int id);
 
     @GetMapping("customers/{id}/phoneNumber")
-    public String getPhoneNumberByCustomerId(@PathVariable int id);
+    String getPhoneNumberByCustomerId(@PathVariable int id);
+
+    @GetMapping("customers/{id}/deposits")
+    List<Integer> getDepositsByCustomerId(@PathVariable int id);
+
+    @PostMapping("/customersDeposit/add")
+    Map<String, Object> addCustomerDeposit(@RequestParam int customerId, @RequestParam int depositId);
+
 }
