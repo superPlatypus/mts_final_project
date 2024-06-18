@@ -24,7 +24,6 @@ public class CustomerService implements UserDetailsService {
     private final CustomerRepository customerRepository;
     private final CustomerDepositRepository customerDepositRepository;
     private final JWTUtilty jwtUtilty;
-//    private final PasswordEncoder passwordEncoder;
 
     public CustomerService(CustomerRepository customerRepository, CustomerDepositRepository customerDepositRepository, JWTUtilty jwtUtilty) {
         this.customerRepository = customerRepository;

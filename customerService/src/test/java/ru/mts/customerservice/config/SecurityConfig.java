@@ -1,12 +1,11 @@
 package ru.mts.customerservice.config;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.AuthenticationProvider;
-import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -21,9 +20,6 @@ import ru.mts.customerservice.service.CustomerService;
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
-    @Lazy
-    private CustomerService userDetailsService;
-    @Autowired
     AuthTokenFilter authenticationJwtTokenFilter;
 
     @Bean
@@ -36,10 +32,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf().disable()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
                 .authorizeRequests()
-                .antMatchers("/signin").permitAll()
-//                .antMatchers("/").permitAll()
-                .anyRequest().authenticated();
-//        .anyRequest().permitAll();
+                .anyRequest().permitAll();
         http.addFilterBefore(authenticationJwtTokenFilter, UsernamePasswordAuthenticationFilter.class);
     }
 

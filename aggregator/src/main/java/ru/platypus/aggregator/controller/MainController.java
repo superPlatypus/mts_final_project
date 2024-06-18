@@ -202,7 +202,6 @@ public class MainController {
                                    @RequestParam("phoneNumber") String phoneNumber,
                                    Model model,
                                    RedirectAttributes redirectAttributes){
-//        String phoneNumber = (String) model.getAttribute("phoneNumber");
         ResponseEntity<String> isValid = smsServiceFeignClient.verify(phoneNumber, code);
         if (isValid.getStatusCode() == HttpStatus.OK) {
             accountServiceFeignClient.addMoney(accountServiceFeignClient.getCurrentBankAccount(), BigDecimal.valueOf((double) depositServiceFeignClient.getDeposit(id).get("depositAmount")));
@@ -261,7 +260,6 @@ public class MainController {
         }
         customerServiceFeignClient.addCustomerDeposit(Integer.parseInt(customerServiceFeignClient.getCurrentCustomer()), savedDepositId);
         depositServiceFeignClient.newRequest(Integer.parseInt(customerServiceFeignClient.getCurrentCustomer()), savedDepositId);
-//        depositServiceFeignClient.updateStatus(depositServiceFeignClient.getRequestByDepositId(savedDepositId).getBody(), 1);
         model.addAttribute("savedDepositId", savedDepositId);
         return "depositVerify";
     }

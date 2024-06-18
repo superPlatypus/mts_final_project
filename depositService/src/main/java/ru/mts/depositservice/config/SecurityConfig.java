@@ -21,7 +21,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     AuthTokenFilter authenticationJwtTokenFilter;
-    //
     @Bean
     @Lazy
     public AuthenticationManager authenticationManager(AuthenticationConfiguration authConfig) throws Exception {

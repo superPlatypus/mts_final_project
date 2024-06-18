@@ -28,7 +28,7 @@ public class Deposit {
         depositRefill = depositTypeId == 1 || depositTypeId == 2;
         startDate = LocalDate.now();
         endDate = startDate.plusMonths(month);
-        depositRate = BigDecimal.valueOf(16.2);
+        depositRate = BigDecimal.valueOf(16.20);
         percentPaymentAccountId = depositAccountId;
         if (typePercentPaymentId == 1){
             percentPaymentDate = startDate.plusMonths(1);
