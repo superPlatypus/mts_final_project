@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Вклад</title>
+</head>
+<body>
+Детализация вклада
+<div th:text="'Счёт вклада: ' + ${account}"></div>
+<div th:text="'Срок вклада: ' + ${month} + 'мес.'"></div>
+<div th:text="'Вид вклада: ' + ${depositType}"></div>
+<div th:text="'Сумма: ' + ${amount}"></div>
+<div th:text="'Ставка: ' + ${rate} + '%'"></div>
+<div th:if="${capitalization}">
+    Капитализация вклада: Да
+</div>
+<div th:unless="${capitalization}">
+    <div th:text="'Период выплат: ' + ${typePercentPayment}"></div>
+    <div th:text="'Дата следующей выплаты : ' + ${percentPaymentDate}"></div>
+    <div th:text="'Счёт выплат : ' + ${percentPaymentAccountId}"></div>
+</div>
+<div th:text="'Дата открытия : ' + ${startDate}"></div>
+<div th:text="'Дата закрытия : ' + ${endDate}"></div>
+<div th:text="'Счёт возвращения вклада : ' + ${depositRefundAccount}"></div>
+
+<div th:if="${depositTypeId != 3}">
+    <a th:href="@{/deposits/{id}/addMoney(id=${deposit['id']})}">Пополнить вклад</a>
+</div>
+<a th:href="@{/deposits/{id}/close(id=${deposit['id']})}">Закрыть вклад</a>
+
+</body>
+</html>

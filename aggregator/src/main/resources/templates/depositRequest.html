@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Статус заявки</title>
+</head>
+<body>
+<div th:if="${ok}">
+    Вклад успешно открыт
+    <div th:text="${depositType}"></div>
+    <div th:text="${amount}"></div>
+    <div th:text="${date}"></div>
+    <div th:text="${rate}"></div>
+</div>
+<div th:unless="${ok}">
+    Недостаточно средств для открытия вклада
+    <div th:text="${depositType}"></div>
+    <div th:text="${amount}"></div>
+    <div th:text="${date}"></div>
+    <div th:text="${rate}"></div>
+</div>
+<a href="/">На главную</a>
+</body>
+</html>

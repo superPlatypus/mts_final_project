@@ -45,16 +45,19 @@ create table requests
     customer_id  integer,
     request_date date,
     deposits_id  integer,
-    primary key (id_request),
-    foreign key (deposits_id) references deposits (id_deposit)
-);
-
-create table current_request_status
-(
-    request_id        integer,
     request_status_id integer,
-    change_datetime   timestamptz,
-    primary key (request_id, request_status_id),
-    foreign key (request_id) references requests (id_request),
+    change_datetime timestamptz,
+    primary key (id_request),
+    foreign key (deposits_id) references deposits (id_deposit),
     foreign key (request_status_id) references request_statuses (id_request_status)
 );
+
+-- create table current_request_status
+-- (
+--     request_id        integer,
+--     request_status_id integer,
+--     change_datetime   timestamptz,
+--     primary key (request_id, request_status_id),
+--     foreign key (request_id) references requests (id_request),
+--     foreign key (request_status_id) references request_statuses (id_request_status)
+-- );

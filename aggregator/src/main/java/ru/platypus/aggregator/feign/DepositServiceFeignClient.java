@@ -26,7 +26,7 @@ public interface DepositServiceFeignClient {
     Map<String, Object> getTypesPercentPaymentById(@PathVariable int id);
 
     @PostMapping("addDepositWithPercents")
-    ResponseEntity<String> addDepositWithPercents(
+    ResponseEntity<Integer> addDepositWithPercents(
             @RequestParam("depositAccountId") int accountId,
             @RequestParam("depositTypeId") int depositTypeId,
             @RequestParam("depositAmount") BigDecimal depositAmount,
@@ -34,7 +34,7 @@ public interface DepositServiceFeignClient {
             @RequestParam("month") int month);
 
     @PostMapping("addDepositWithCapitalization")
-    ResponseEntity<String> addDepositWithCapitalization(
+    ResponseEntity<Integer> addDepositWithCapitalization(
             @RequestParam("depositAccountId") int accountId,
             @RequestParam("depositTypeId") int depositTypeId,
             @RequestParam("depositAmount") BigDecimal depositAmount,
@@ -42,4 +42,31 @@ public interface DepositServiceFeignClient {
 
     @GetMapping("/deposit/{id}")
     Map<String, Object> getDeposit(@PathVariable int id);
+
+    @PostMapping("/newRequest")
+    ResponseEntity<Integer> newRequest(@RequestParam("customerId") int customerId, @RequestParam("depositId") int depositId);
+
+    @PostMapping("request/{id}/updateStatus")
+    ResponseEntity<String> updateStatus(@PathVariable("id") int requestId, @RequestParam("statusId") int statusId);
+
+    @GetMapping("requestByDepositId")
+    ResponseEntity<Integer> getRequestByDepositId(@RequestParam("depositId") int depositId);
+
+    @PostMapping("deposit/{id}/addMoney")
+    ResponseEntity<Integer> addMoney(@PathVariable int id, @RequestParam("amount") BigDecimal amount);
+
+    @PostMapping("deposit/{id}/delete")
+    void deleteDeposit(@PathVariable int id);
+
+    @GetMapping("requestStatus")
+    ResponseEntity<Integer> getRequestStatus(@RequestParam("requestId") int requestId);
+
+    @GetMapping("rejectedRequestsByCustomerId")
+    List<Map<String, Object>> getRejectedRequests(@RequestParam("customerId") int customerId);
+
+    @GetMapping("/request{id}")
+    Map<String, Object> getRequest(@PathVariable("id") int requestId);
+
+    @PostMapping("/request{id}/delete")
+    void deleteRequest(@PathVariable("id") int requestId);
 }

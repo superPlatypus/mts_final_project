@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Подтверждение пополнения</title>
+    <style>
+        .hide {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+Подтверждение
+<form th:action="@{/deposits/{id}/addMoney/verify(id=${id})}" method="post">
+    <label for="code">Код подтверждения:</label>
+    <input class="hide" type="number" id="amount" name="amount" th:value="${amount}"/>
+    <input class="hide" type="text" id="phoneNumber" name="phoneNumber" th:value="${phoneNumber}"/>
+    <input type="text" id="code" name="code" required/>
+    <button type="submit">Подтвердить</button>
+</form>
+
+</body>
+</html>

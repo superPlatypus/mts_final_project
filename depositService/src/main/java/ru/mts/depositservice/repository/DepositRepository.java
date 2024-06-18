@@ -6,4 +6,5 @@ import ru.mts.depositservice.entity.Deposit;
 
 @Repository
 public interface DepositRepository extends JpaRepository<Deposit, Integer> {
+
 }

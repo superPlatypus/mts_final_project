@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Отклонённая заявка</title>
+</head>
+<body>
+Отклонённая заявка
+<div th:text="'Код заявки: ' + ${id}"></div>
+<div th:text="'Дата : ' + ${date}"></div>
+<div th:text="'Счёт : ' + ${account}"></div>
+<div th:text="'Сумма : ' + ${amount}"></div>
+<!--<a th:href="@{/requests/{id}/delete(id=${id})}">Удалить</a>-->
+<form th:action="@{/request/{id}/delete(id=${id})}" method="post">
+    <button type="submit">Удалить</button>
+</form>
+</body>
+</html>

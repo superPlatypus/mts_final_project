@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Закрытие вклада</title>
+
+</head>
+<body>
+Подтверждение
+<form th:action="@{/deposits/{id}/close(id=${id})}" method="post">
+    <label for="code">Код подтверждения:</label>
+    <input type="text" id="code" name="code" required/>
+    <input type="hidden" id="phoneNumber" name="phoneNumber" th:value="${phoneNumber}" required/>
+    <button type="submit">Подтвердить</button>
+</form>
+
+</body>
+</html>

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<div th:if="${ok}">
+    Вклад успешно пополнен
+    <div th:text="'Сумма пополнения: ' + ${amount}"></div>
+    <div th:text="'Дата: ' + ${date}"></div>
+</div>
+<div th:unless="${ok}">
+    Недостаточно средств
+    <div th:text="'Сумма пополнения: ' + ${amount}"></div>
+    <div th:text="'Дата: ' + ${date}"></div>
+</div>
+<a href="/">На главную</a>
+</body>
+</html>

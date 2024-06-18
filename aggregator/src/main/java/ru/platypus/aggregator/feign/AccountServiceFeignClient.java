@@ -17,4 +17,13 @@ public interface AccountServiceFeignClient {
 
     @PostMapping("/bankAccount{id}/addMoney")
     ResponseEntity<String> addMoney(@PathVariable int id, @RequestParam BigDecimal amount);
+
+    @GetMapping("/bankAccount/{id}/minusMoney/isAllow")
+    ResponseEntity<Boolean> isAllow(@PathVariable int id, @RequestParam("amount") BigDecimal amount);
+
+    @PostMapping("/bankAccount/{id}/minusMoney")
+    ResponseEntity<String> minusMoney(@PathVariable int id, @RequestParam("amount") BigDecimal amount);
+
+    @GetMapping("currentBankAccountId")
+    Integer getCurrentBankAccount();
 }

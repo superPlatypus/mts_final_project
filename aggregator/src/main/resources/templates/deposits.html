@@ -11,6 +11,7 @@
     Мои вклады:
     <ul>
         <li th:each="deposit : ${deposits}">
+            <a th:href="@{/deposits/{id}(id=${deposit['id']})}">Перейти к вкладу</a>
             <div th:text="'Сумма вклада: ' + ${deposit['depositAmount']}"></div>
             <div th:text="'Дата открытия: ' + ${deposit['startDate']}"></div>
             <div th:text="'Дата закрытия: ' + ${deposit['endDate']}"></div>
@@ -19,7 +20,19 @@
         </li>
     </ul>
 </div>
-<a href="/newDeposit"></a>
+<!--[{id=18, customerId=2, requestDate=2024-06-18, depositId=19, requestStatusId=4, changeDateTime=2024-06-18T10:29:20.291852+03:00}]-->
+Отклонённые заявки:
+<ul>
+    <li th:each="rejectedRequest : ${rejectedRequests}">
+        <a th:href="@{/requests/{id}(id=${rejectedRequest['id']})}">Перейти к заявке</a>
+        <div th:text="'Дата: ' + ${rejectedRequest['requestDate']}"></div>
+        <div>Причина: Недостаточно средств</div>
+        <br>
+    </li>
+</ul>
+<a href="/newDeposit">Открыть вклад</a>
+<br>
+<a href="/">На главную</a>
 
 </body>
 </html>

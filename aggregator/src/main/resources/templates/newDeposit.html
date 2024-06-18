@@ -3,17 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <title>Вклады</title>
+    <script>
+        // function toggleSelect() {
+        //     var checkbox = document.getElementById('capitalization');
+        //     var select = document.getElementById('typePercentPayment');
+        //     select.disabled = checkbox.checked;
+        // }
+    </script>
 </head>
 <body>
 
-<form th:action="@{/deposits}" method="post">
+<form th:action="@{/newDeposit}" th:object="${newDeposit}" method="post">
     <div>
-        <p th:text="'Счет вклада' + ${account}"></p>
+        <p th:text="'Счет вклада: ' + ${account}"></p>
     </div>
-
+    <input type="hidden" id="phoneNumberHidden" name="phoneNumber" th:value="${phoneNumber}" th:field="*{phoneNumber}" />
     <div>
         <label for="depositTypes">Тип вклада</label>
-        <select id="depositTypes" name="selectedDepositId">
+        <select id="depositTypes" name="depositTypeId" th:field="*{depositTypeId}">
             <option th:each="depositType : ${depositTypes}"
                     th:value="${depositType['id']}"
                     th:text="${depositType['name']}">Тип</option>
@@ -21,13 +28,27 @@
     </div>
 
     <div>
-        <label for="amount">Возраст:</label>
-        <input type="number" id="amount" name="amount" placeholder="Введите сумму" />
+        <label for="amount">Сумма: </label>
+        <input type="number" id="amount" name="depositAmount" th:field="*{depositAmount}" placeholder="Введите сумму"  min="10000" value="10000" />
+    </div>
+
+    <div>
+        <label for="month">Срок вклада:</label>
+        <select id="month" name="month" th:field="*{month}">
+            <option value="3">3 месяца</option>
+            <option value="6">6 месяцев</option>
+            <option value="12">12 месяцев</option>
+        </select>
+    </div>
+
+    <div>
+        <input type="checkbox" name="capitalization" id="capitalization" th:field="*{capitalization}" />
+        <label for="capitalization">Капитализация вклада</label>
     </div>
 
     <div>
         <label for="typePercentPayment">Тип вклада</label>
-        <select id="typePercentPayment" name="selectedTypePercentPayment">
+        <select id="typePercentPayment" name="typePercentPaymentId" th:field="*{typePercentPaymentId}">
             <option th:each="typePercentPayment : ${typesPercentPayment}"
                     th:value="${typePercentPayment['id']}"
                     th:text="${typePercentPayment['period']}">Тип</option>
@@ -35,11 +56,11 @@
     </div>
 
     <div>
-        <p th:text="'Счет выплат' + ${account}"></p>
+        <p th:text="'Счет выплат: ' + ${account}"></p>
     </div>
 
 
-    <button type="submit">Отправить</button>
+    <button type="submit">Подтвердить</button>
 </form>
 
 </body>

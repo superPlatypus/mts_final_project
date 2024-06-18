@@ -36,4 +36,7 @@ public interface CustomerServiceFeignClient {
     @PostMapping("/customersDeposit/add")
     Map<String, Object> addCustomerDeposit(@RequestParam int customerId, @RequestParam int depositId);
 
+    @PostMapping("/customerDeposit/delete")
+    void deleteCustomerDeposit(@RequestParam int customerId, @RequestParam int depositId);
+
 }

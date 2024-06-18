@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Пополнение вклада</title>
+</head>
+<body>
+Пополнение вклада
+<form th:action="@{/deposits/{id}/addMoney(id=${id})}" method="post">
+    <label for="amount">Сумма пополнения:</label>
+    <input type="text" id="amount" name="amount" required/>
+    <button type="submit">Пополнить</button>
+</form>
+</body>
+</html>

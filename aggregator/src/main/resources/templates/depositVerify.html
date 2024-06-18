@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Подтверждение открытия вклада</title>
+    <style>
+        .hide {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+<form th:action="@{/depositVerify}" method="post">
+    <input type="hidden" id="phoneNumberHidden" name="phoneNumber" th:value="${phoneNumber}" />
+    <input class="hide" type="number" id="typePercentPaymentId" name="typePercentPaymentId" th:value="${newDeposit.typePercentPaymentId}"/>
+    <input class="hide" type="number" id="depositAmount" name="depositAmount" th:value="${newDeposit.depositAmount}"/>
+    <input class="hide" type="number" id="month" name="month" th:value="${newDeposit.month}"/>
+    <input class="hide" type="checkbox" id="capitalization" name="capitalization" th:value="${newDeposit.capitalization}"/>
+    <input class="hide" type="number" id="depositTypeId" name="depositTypeId" th:value="${newDeposit.depositTypeId}"/>
+    <input class="hide" type="number" id="savedDepositId" name="savedDepositId" th:value="${savedDepositId}"/>
+    <label for="code">Код подтверждения:</label>
+    <input type="text" id="code" name="code" required/>
+    <button type="submit">Подтвердить</button>
+    <div th:if="${param.error}">
+        <p>Неверный код подтверждения. Пожалуйста, попробуйте снова.</p>
+    </div>
+</form>
+</body>
+</html>

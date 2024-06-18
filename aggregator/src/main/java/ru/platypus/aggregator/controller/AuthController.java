@@ -32,19 +32,8 @@ public class AuthController {
 
     @PostMapping("/login")
     public String loginPost(@ModelAttribute("signin") Signin signin, HttpServletResponse response, Model model) {
-//        var jwt = customerServiceFeignClient.signin(signin);
-//        System.out.println(jwt.getBody());
         model.addAttribute("phoneNumber", signin.getPhoneNumber());
         smsServiceFeignClient.send(signin.getPhoneNumber());
-        System.out.println("КОД ОТПРАВЛЕН!!!!");
-//        ResponseCookie cookie = ResponseCookie.from("jwtToken", jwt.getBody())
-//                .httpOnly(true)
-//                .secure(true)
-//                .path("/")
-//                .maxAge(7 * 24 * 60 * 60) // 7 days
-//                .build();
-
-//        response.addHeader("Set-Cookie", cookie.toString());
         return "loginVerify";
     }
 

@@ -12,6 +12,7 @@ import ru.mts.customerservice.entity.CustomerDepositId;
 import ru.mts.customerservice.jwt.JWTUtilty;
 import ru.mts.customerservice.repostitory.CustomerDepositRepository;
 import ru.mts.customerservice.repostitory.CustomerRepository;
+import ru.mts.customerservice.service.CustomerService;
 
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
@@ -24,12 +25,14 @@ public class CustomerController {
     private final JWTUtilty jwtUtilty;
     private final AuthenticationManager authenticationManager;
     private final CustomerDepositRepository customerDepositRepository;
+    private final CustomerService customerService;
 
-    public CustomerController(CustomerRepository customerRepository, JWTUtilty jwtUtilty, AuthenticationManager authenticationManager, CustomerDepositRepository customerDepositRepository) {
+    public CustomerController(CustomerRepository customerRepository, JWTUtilty jwtUtilty, AuthenticationManager authenticationManager, CustomerDepositRepository customerDepositRepository, CustomerService customerService) {
         this.customerRepository = customerRepository;
         this.jwtUtilty = jwtUtilty;
         this.authenticationManager = authenticationManager;
         this.customerDepositRepository = customerDepositRepository;
+        this.customerService = customerService;
     }
 
     @GetMapping("/currentCustomer")
@@ -85,7 +88,11 @@ public class CustomerController {
         CustomerDepositId customerDepositId = new CustomerDepositId(customerId, depositId);
         CustomerDeposit customerDeposit = new CustomerDeposit(customerDepositId, customer);
         return customerDepositRepository.save(customerDeposit);
+    }
 
+    @PostMapping("/customerDeposit/delete")
+    public void deleteCustomerDeposit(@RequestParam int customerId, @RequestParam int depositId) {
+        customerService.deleteCustomerDeposit(customerId, depositId);
     }
 
 

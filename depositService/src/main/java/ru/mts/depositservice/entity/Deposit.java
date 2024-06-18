@@ -28,7 +28,7 @@ public class Deposit {
         depositRefill = depositTypeId == 1 || depositTypeId == 2;
         startDate = LocalDate.now();
         endDate = startDate.plusMonths(month);
-        depositRate = 16.2f;
+        depositRate = BigDecimal.valueOf(16.2);
         percentPaymentAccountId = depositAccountId;
         if (typePercentPaymentId == 1){
             percentPaymentDate = startDate.plusMonths(1);
@@ -47,9 +47,10 @@ public class Deposit {
         depositRefill = depositTypeId == 1 || depositTypeId == 2;
         startDate = LocalDate.now();
         endDate = startDate.plusMonths(month);
-        depositRate = 16.2f;
+        depositRate = BigDecimal.valueOf(16.2);
         capitalization = true;
         typePercentPaymentId = 3;
+        depositRefundAccountId = depositAccountId;
     }
 
     @Id
@@ -76,7 +77,7 @@ public class Deposit {
     private LocalDate endDate;
 
     @Column(name = "deposit_rate")
-    private double depositRate;
+    private BigDecimal  depositRate;
 
     @Column(name = "type_percent_payment_id")
     private int typePercentPaymentId;
