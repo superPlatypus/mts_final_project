@@ -1,5 +1,6 @@
 package ru.mts.depositservice.service;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.mts.depositservice.entity.Deposit;
@@ -30,5 +31,25 @@ public class DepositService {
     public void deleteDeposit(int id) {
         requestRepository.deleteByDepositId(id);
         depositRepository.deleteById(id);
+    }
+
+    public Deposit getDeposit(int id) {
+        return depositRepository.findById(id).orElseThrow(() -> new RuntimeException("Вклад не существует"));
+
+    }
+
+    @Transactional
+    public ResponseEntity<Integer> addDepositWithPercents(int accountId, int depositTypeId, BigDecimal depositAmount, int typePercentPaymentId, int month) {
+        Deposit deposit = new Deposit(accountId, depositTypeId, depositAmount, typePercentPaymentId, month);
+        int id = depositRepository.save(deposit).getId();
+        return ResponseEntity.ok(id);
+    }
+
+    @Transactional
+    public ResponseEntity<Integer> addDepositWithCapitalization(int accountId, int depositTypeId, BigDecimal depositAmount, int month) {
+        Deposit deposit = new Deposit(accountId, depositTypeId, depositAmount, month);
+        System.out.println(deposit);
+        int id = depositRepository.save(deposit).getId();
+        return ResponseEntity.ok(id);
     }
 }

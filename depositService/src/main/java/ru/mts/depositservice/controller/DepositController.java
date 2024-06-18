@@ -29,17 +29,9 @@ public class DepositController {
         this.depositService = depositService;
     }
 
-    @GetMapping("/")
-    public String home() {
-        return "Hello from deposit service!!";
-    }
-
-
-
     @GetMapping("/deposit/{id}")
     public Deposit getDeposit(@PathVariable int id) {
-
-        return depositRepository.findById(id).orElseThrow( () -> new RuntimeException("Вклад не существует"));
+        return depositService.getDeposit(id);
     }
 
 
@@ -51,9 +43,8 @@ public class DepositController {
             @RequestParam("depositAmount") BigDecimal depositAmount,
             @RequestParam("typePercentPaymentId") int typePercentPaymentId,
             @RequestParam("month") int month) {
-        Deposit deposit = new Deposit(accountId, depositTypeId, depositAmount, typePercentPaymentId, month);
-        int id = depositRepository.save(deposit).getId();
-        return ResponseEntity.ok(id);
+        return depositService.addDepositWithPercents(accountId, depositTypeId,depositAmount, typePercentPaymentId,month);
+
     }
 
     @PostMapping("addDepositWithCapitalization")
@@ -62,10 +53,8 @@ public class DepositController {
             @RequestParam("depositTypeId") int depositTypeId,
             @RequestParam("depositAmount") BigDecimal depositAmount,
             @RequestParam("month") int month) {
-        Deposit deposit = new Deposit(accountId, depositTypeId, depositAmount, month);
-        System.out.println(deposit);
-        int id = depositRepository.save(deposit).getId();
-        return ResponseEntity.ok(id);
+        return depositService.addDepositWithCapitalization(accountId, depositTypeId, depositAmount, month);
+
     }
 
     @PostMapping("deposit/{id}/addMoney")

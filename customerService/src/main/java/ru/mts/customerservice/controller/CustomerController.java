@@ -42,52 +42,45 @@ public class CustomerController {
 
     @PostMapping("/signin")
     public ResponseEntity<String> signin(@RequestBody Signin signin, HttpServletResponse response) {
-        Optional<Customer> customer = customerRepository.findByPhoneNumber(signin.getPhoneNumber());
-        if (customer.isPresent()){
-            String jwtToken = jwtUtilty.generateJwtToken(customer.get().getIdCustomer());
-            return ResponseEntity.ok(jwtToken);
-        }
-        else {
-            return ResponseEntity.ok("Invalid phone number");
-        }
+        return customerService.signin(signin);
+
 
     }
 
     @GetMapping("customers")
     public List<Customer> getAllCustomers() {
-        return customerRepository.findAll();
+        return customerService.getAllCustomers();
+
     }
 
     @GetMapping("customers/{id}")
     public Customer getCustomerById(@PathVariable int id) {
-        return customerRepository.findById(id).orElse(null);
+        return customerService.getCustomerById(id);
+
     }
 
     @GetMapping("customers/{id}/bankAccount")
     public int getBankAccountByCustomerId(@PathVariable int id) {
-        return customerRepository.findById(id).orElse(null).getBank_account_id();
+        return customerService.getBankAccountByCustomerId(id);
+
     }
 
     @GetMapping("customers/{id}/phoneNumber")
     public String getPhoneNumberByCustomerId(@PathVariable int id) {
-        return customerRepository.findById(id).orElse(null).getPhoneNumber();
+        return customerService.getPhoneNumberByCustomerId(id);
+
     }
 
     @GetMapping("customers/{id}/deposits")
     public List<Integer> getDepositsByCustomerId(@PathVariable int id) {
-        return customerDepositRepository.findByCustomer_IdCustomer(id)
-                .stream()
-                .map(customerDeposit -> customerDeposit.getId().getDeposit_id())
-                .collect(Collectors.toList());
+        return customerService.getDepositsByCustomerId(id);
+
     }
 
     @PostMapping("/customersDeposit/add")
     public CustomerDeposit  addCustomerDeposit(@RequestParam int customerId, @RequestParam int depositId) {
-        Customer customer = customerRepository.findById(customerId)
-                .orElseThrow(() -> new RuntimeException("Customer not found"));
-        CustomerDepositId customerDepositId = new CustomerDepositId(customerId, depositId);
-        CustomerDeposit customerDeposit = new CustomerDeposit(customerDepositId, customer);
-        return customerDepositRepository.save(customerDeposit);
+        return customerService.addCustomerDeposit(customerId, depositId);
+
     }
 
     @PostMapping("/customerDeposit/delete")

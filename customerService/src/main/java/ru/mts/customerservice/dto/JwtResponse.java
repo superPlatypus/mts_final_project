@@ -1,4 +1,4 @@
-package ru.mts.customerservice.controller;
+package ru.mts.customerservice.dto;
 
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
